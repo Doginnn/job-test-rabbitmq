@@ -1,0 +1,21 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host: '%env(RABBITMQ_HOST)%'
+            port: '%env(RABBITMQ_PORT)%'
+            user: '%env(RABBITMQ_USER)%'
+            password: '%env(RABBITMQ_PASSWORD)%'
+            vhost: '/'
+            lazy: false
+            connection_timeout: 3
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+            use_socket: false
+    producers:
+        # use 'old_sound_rabbit_mq.task_producer' service to send data.
+        job-send:
+            connection:       default
+            exchange_options: { name: 'job-send', type: direct }
+            queue_options: { name: 'job-send', routing_keys: [ 'job-send' ] }
+            service_alias: 'producer.job-send'
