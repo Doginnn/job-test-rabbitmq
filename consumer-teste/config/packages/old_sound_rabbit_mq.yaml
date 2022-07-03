@@ -1,0 +1,14 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+    consumers:
+        job-send:
+            connection:       default
+            exchange_options: { name: 'job-send', type: direct }
+            queue_options:    { name: 'job-send', routing_keys: [ 'job-send' ]}
+            callback:         App\Consumer\JobTestConsumer
+            enable_logger: true
+            graceful_max_execution:
+                timeout: 120 #2 minutes
+                exit_code: 10 #default is 0
