@@ -14,8 +14,8 @@ old_sound_rabbit_mq:
             use_socket: false
     producers:
         # use 'old_sound_rabbit_mq.task_producer' service to send data.
-        job-send:
+        send:
             connection:       default
-            exchange_options: { name: 'job-send', type: direct }
-            queue_options: { name: 'job-send', routing_keys: [ 'job-send' ] }
-            service_alias: 'producer.job-send'
+            exchange_options: { name: 'send', type: direct }
+            queue_options: { name: 'send', routing_keys: [ 'send' ] }
+            service_alias: 'producer.send'

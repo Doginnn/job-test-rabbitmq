@@ -20,7 +20,7 @@ class SendAction
     {
         $content = $request->getContent();
 
-        $sendProducer->publish($content, 'job-send');
+        $sendProducer->publish($content, 'send');
 
         return new JsonResponse('Succes job-send!', Response::HTTP_OK);
     }
